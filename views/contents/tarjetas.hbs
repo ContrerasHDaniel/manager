@@ -1,0 +1,178 @@
+<!-- DataTables CDN -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+
+<!-- Page Heading -->
+<h1 class="h3 text-gray-800">Tarjetas</h1>
+<!-- Laboratory equipment page -->
+<div class="card shadow mb-4">
+    <!-- Card Header -->
+    <div class="card-header py-3">
+        <div class="col-md-6">
+            <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block">Inventario de tarjetas y dispositivos</h6>
+        </div>
+        <div class="ml-auto col-md-6 fl-r">
+            <button class="btn btn-danger fl-r">Eliminar</button>
+            <button class="btn btn-success fl-r" data-toggle="modal" data-target="#createModal">Agregar</button>
+        </div>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="dataTable" class="table table-bordered dataTable" role="grid" aria-describedby="dataTable_info" style="width: auto;" width="auto" cellspacing:"0">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: auto;" aria-sort="ascending" aria-label="Description: activar para ordenar de manera descendiente">
+                                        Descripción
+                                    </th>
+                                    <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: auto;" aria-sort="ascending" aria-label="Marca: activar para ordenar de manera descendiente">
+                                        Marca
+                                    </th>
+                                    <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: auto;" aria-sort="ascending" aria-label="Modelo: activar para ordenar de manera descendiente">
+                                        Modelo
+                                    </th>
+                                    <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: auto;" aria-sort="ascending" aria-label="Serie: activar para ordenar de manera descendiente">
+                                        Serie
+                                    </th>
+                                    <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: auto;" aria-sort="ascending" aria-label="Uaz: activar para ordenar de manera descendiente">
+                                        UAZ
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tfoot>
+                                <th rowspan="1" colspan="1">Descripción</th>
+                                <th rowspan="1" colspan="1">Marca</th>
+                                <th rowspan="1" colspan="1">Modelo</th>
+                                <th rowspan="1" colspan="1">Serie</th>
+                                <th rowspan="1" colspan="1">UAZ</th>
+                            </tfoot>
+                            <tbody id="dabb">
+                                {{fillTarjetas tarjetas}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Update Modal-->
+<div class="modal fade idx-10000" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-update" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="updateModalLabel">Actualizar datos</h5>
+				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>                
+			<div class="modal-body">
+				<h6 class="modal-title text-gray-500" id="bodyLabel">Introduzca los nuevos datos o presione 'Cancelar' para salir</h6>
+				<div class="md-form mb-5">
+                    <input type="hidden" id="idUpdate" value="">
+					<label data-error="wrong" data-success="right" for="descUpdate">Descripción:</label>
+					<input type="text" class="form-control validate" id="descUpdate">
+                    <label data-error="wrong" data-success="right" for="brandUpdate">Marca:</label>
+					<input type="text" class="form-control validate" id="brandUpdate">
+                    <label data-error="wrong" data-success="right" for="modelUpdate">Modelo:</label>
+					<input type="text" class="form-control validate" id="modelUpdate">
+                    <label data-error="wrong" data-success="right" for="seriesUpdate">Serie:</label>
+					<input type="text" class="form-control validate" id="seriesUpdate">
+                    <label data-error="wrong" data-success="right" for="uazUpdate">UAZ:</label>
+					<input type="text" class="form-control validate" id="uazUpdate">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+				<button id="updateBtn" type="button" class="btn btn-primary">Actualizar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Update Modal-->
+
+<!-- Create Modal-->
+<div class="modal fade idx-10000" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-update" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="createModalLabel">Registrar nuevo elemento</h5>
+				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>                
+			<div class="modal-body">
+				<h6 class="modal-title text-gray-500" id="bodyLabel">Introduzca los datos o presione 'Cancelar' para salir</h6>
+				<div class="md-form mb-5">
+					<label data-error="wrong" data-success="right" for="descUpdate">Descripción:</label>
+					<input type="text" class="form-control validate" id="descUpdate">
+                    <label data-error="wrong" data-success="right" for="brandUpdate">Marca:</label>
+					<input type="text" class="form-control validate" id="brandUpdate">
+                    <label data-error="wrong" data-success="right" for="modelUpdate">Modelo:</label>
+					<input type="text" class="form-control validate" id="modelUpdate">
+                    <label data-error="wrong" data-success="right" for="seriesUpdate">Serie:</label>
+					<input type="text" class="form-control validate" id="seriesUpdate">
+                    <label data-error="wrong" data-success="right" for="uazUpdate">UAZ:</label>
+					<input type="text" class="form-control validate" id="uazUpdate">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+				<button id="addBtn" type="button" class="btn btn-primary">Guardar</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Create Modal-->
+
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- DataTables Script -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/js/updateTarjeta.js"></script>
+<script>
+    $(document).ready(function() {
+        // Inicializa variables modificables
+        var id = "";
+
+        // Inicializa el dataTable
+        var table = $('#dataTable').DataTable({
+            "language": {
+                lengthMenu: "Mostrar _MENU_ registros por página",
+                zeroRecords: "No hay registros para mostrar",
+                info: "Mostrando página _PAGE_ de _PAGES_",
+                infoEmpty: "No hay registros disponibles",
+                infoFiltered: "(filtrados de un total de _MAX_ registros)",
+                search: "Buscar"
+            },
+            "oLanguage":{
+                "oPaginate":{
+                    sNext: "Siguiente",
+                    sPrevious: "Anterior"
+                }
+            }
+        });
+
+        // Evento click de una fila en la tabla
+        $('#dataTable tbody').on('click', 'tr', function(){
+            // Se obtienen todos los valores de los campos en la fila.
+            var datos = table.row(this).data();
+            id  = table.row(this).id();
+            
+            // Se colocan los valores de los campos en el modal para facilitar la edición.
+            $('#descUpdate').attr('value',datos[0]);
+            $('#brandUpdate').attr('value',datos[1]);
+            $('#modelUpdate').attr('value',datos[2]);
+            $('#seriesUpdate').attr('value',datos[3]);
+            $('#uazUpdate').attr('value',datos[4]);
+        });
+
+        $('#updateBtn').click(function(){
+            // Se envían todos los datos a la función de actualización de la fila seleccionada.
+            updateData(id, $('#descUpdate').val(), $('#brandUpdate').val(), $('#modelUpdate').val(), $('#seriesUpdate').val(), $('#uazUpdate').val());
+        });
+    });
+</script>

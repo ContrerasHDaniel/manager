@@ -1,0 +1,4 @@
+# Ignores
+/node_modules
+*.xlsx
+package-lock.json

@@ -1,0 +1,25 @@
+<div class="modal fade idx-10000" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-update" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="updateModalLabel">Eliminar registro</h5>
+				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<h6 class="modal-title text-gray-500" id="bodyLabel">Introduzca los datos del registro a eliminar o presione 'Cancelar' para salir</h6>
+				<div class="md-form mb-5">
+					<label data-error="wrong" data-success="right" for="descDelete">Descripción:</label>
+					<input type="text" class="form-control validate" id="descDelete">
+                    <label data-error="wrong" data-success="right" for="rfidDelete">RFID:</label>
+					<input type="text" class="form-control validate" id="rfidDelete">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+				<button id="deleteBtn" type="button" class="btn btn-danger">Eliminar</button>
+			</div>
+		</div>
+	</div>
+</div>

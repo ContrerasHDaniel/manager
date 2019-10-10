@@ -1,0 +1,156 @@
+<!-- DataTables CDN -->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+
+<!-- Page Heading -->
+<h1 class="h3 text-gray-800">Seguridad</h1>
+
+<!-- Calefaccion page -->
+<div class="card shadow mb-4">
+    <!-- Card Header -->
+    <div class="card-header py-3">
+        <div class="col-md-6">
+            <h6 class="m-0 font-weight-bold text-primary d-sm-inline-block">Inventario del equipo de seguridad</h6>
+        </div>
+        <div class="ml-auto col-md-6 fl-r">
+            <button class="btn btn-danger fl-r" data-toggle="modal" data-target="#deleteModal">Eliminar</button>
+            <button class="btn btn-success fl-r" data-toggle="modal" data-target="#createModal">Agregar</button>
+        </div>
+    </div>
+    <!-- Card Body -->
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table id="dataTable" class="table table-bordered dataTable" role="grid" aria-describedby="dataTable_info" style="width: auto;" width="auto" cellspacing:"0">
+                            {{> tableheadnfooter}}
+                            <tbody>
+                                {{fillLab inventarioSeguridad}}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Card Body -->
+<!-- Update Modal-->
+{{> updateModal}}
+<!-- Update Modal -->
+<!-- Create Modal -->
+{{> createModal}}
+<!-- Create Modal -->
+<!-- Delete Modal -->
+{{> deleteModal}}
+<!-- Delete Modal -->
+
+<!-- JQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- DataTables Script -->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/js/inventarioCRUD.js"></script>
+<script>
+    $(document).ready(function() {
+        // Inicializa variables no modificables
+        var id = "";
+
+        // Inicializa el dataTable
+        var table = $('#dataTable').DataTable({
+            "language": {
+                lengthMenu: "Mostrar _MENU_ registros por página",
+                zeroRecords: "No hay registros para mostrar",
+                info: "Mostrando página _PAGE_ de _PAGES_",
+                infoEmpty: "No hay registros disponibles",
+                infoFiltered: "(filtrados de un total de _MAX_ registros)",
+                search: "Buscar"
+            },
+            "oLanguage":{
+                "oPaginate":{
+                    sNext: "Siguiente",
+                    sPrevious: "Anterior"
+                }
+            }
+        });
+
+        $('#dataTable tbody').on('click', 'tr', function(){
+            // Se obtienen todos los valores de los campos en la fila seleccionada
+            var datos = table.row(this).data();
+            // Se obtiene el id del item de inventario
+            id = table.row(this).id();
+            // Se colocan los valores de los campos en el modal para facilitar la edición. 
+            $('#descUpdate').attr('value',datos[0]);
+            $('#typeUpdate').attr('value',datos[1]);
+            $('#brandUpdate').attr('value',datos[2]);
+            $('#modelUpdate').attr('value',datos[3]);
+            $('#seriesUpdate').attr('value',datos[4]);
+            $('#uazUpdate').attr('value',datos[5]);
+            $('#guardUpdate').attr('value',datos[6]);
+            $('#locationUpdate').attr('value',datos[7]);
+            $('#detailsUpdate').attr('value',datos[8]);
+            $('#fundingUpdate').attr('value',datos[9]);
+            $('#rfidUpdate').attr('value', datos[10]);
+        });
+
+        // Evento de cierre de modal de actualización, reinicia la url y los campos
+        $('#updateModal').on('hidden.bs.modal', function(e){
+            e.preventDefault();
+            $('#descUpdate').attr('value',"");
+            $('#typeUpdate').attr('value',"");
+            $('#brandUpdate').attr('value',"");
+            $('#modelUpdate').attr('value',"");
+            $('#seriesUpdate').attr('value',"");
+            $('#uazUpdate').attr('value',"");
+            $('#guardUpdate').attr('value',"");
+            $('#locationUpdate').attr('value',"");
+            $('#detailsUpdate').attr('value',"");
+            $('#fundingUpdate').attr('value',"");
+            $('#rfidUpdate').attr('value', "");
+        });
+
+        // Evento de cierre de modal de actualización, reinicia la url y los campos
+        $('#createModal').on('hidden.bs.modal', function(e){
+            e.preventDefault();
+            $('#descCreate').attr('value',"");
+            $('#typeCreate').attr('value',"");
+            $('#brandCreate').attr('value',"");
+            $('#modelCreate').attr('value',"");
+            $('#seriesCreate').attr('value',"");
+            $('#uazCreate').attr('value',"");
+            $('#guardCreate').attr('value',"");
+            $('#locationCreate').attr('value',"");
+            $('#detailsCreate').attr('value',"");
+            $('#fundingCreate').attr('value',"");
+            $('#rfidCreate').attr('value', "");
+        });
+
+        // Evento de cierre del modal de eliminación, reinicia la url y los campos
+        $('#deleteModal').on('hidden.bs.modal', function(e){
+            e.preventDefault();
+            $('#descDelete').attr('value',"");
+            $('#rfidDelete').attr('value', "");
+        });
+
+        // Evento de actualización del registro
+        $('#submitBtn').click(function(e){
+            // Se envían los datos a la función de actualización
+            updateInv(id, $('#descUpdate').val(), $('#typeUpdate').val(), $('#brandUpdate').val(), $('#modelUpdate').val(), $('#seriesUpdate').val(), $('#uazUpdate').val(), $('#guardUpdate').val(), $('#locationUpdate').val(), $('#detailsUpdate').val(), $('#fundingUpdate').val(), $('#rfidUpdate').val());
+            return false;
+        });
+
+        // Evento de creación de nuevo registro
+        $('#createBtn').click(function(e){
+            // Se envían los datos a la función de crear nuevo inventario
+            createInv($('#descCreate').val(), $('#typeCreate').val(), $('#brandCreate').val(), $('#modelCreate').val(), $('#seriesCreate').val(), $('#uazCreate').val(), $('#guardCreate').val(), $('#locationCreate').val(), $('#detailsCreate').val(), $('#fundingCreate').val(), $('#rfidCreate').val());
+            return false;
+        });
+
+        // Evento de eliminación de un registro
+        $('#deleteBtn').click(function(e){
+            // Se envían los datos del registro a eliminar
+            deleteInv($('#descDelete').val(), $('#rfidDelete').val());
+            return false;
+        });
+    });
+</script>
