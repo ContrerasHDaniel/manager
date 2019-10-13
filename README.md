@@ -1,6 +1,3 @@
-# manager
-A simple inventory manager add, update and delete items from a database.
-
 # CIDVENTARIO v0.1
 A simple inventory manager to add, update and delete items from a mongodb database implemented with Nodejs express.
 
