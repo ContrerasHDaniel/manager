@@ -72,17 +72,6 @@ typesSpa.set("ofc","Oficina");
 typesSpa.set("pry","Proyecci&oacuten");
 typesSpa.set("net","Redes");
 typesSpa.set("sec","Seguridad");
-// mapa de los tipos de inventario sin acento y en minúsculas
-// (útil para comparación en las rutas)
-types = new Map();
-types.set("calefaccion","cal");
-types.set("computo","comp");
-types.set("herramientas","tools");
-types.set("laboratorio","lab");
-types.set("oficina","ofc");
-types.set("proyeccion","pry");
-types.set("redes","net");
-types.set("seguridad","sec");
 
 // Routes
 app.use(require('./routes/index'));

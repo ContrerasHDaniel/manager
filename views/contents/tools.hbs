@@ -53,9 +53,49 @@
 <script type="text/javascript" src="/js/inventarioCRUD.js"></script>
 <script>
     $(document).ready(function() {
+
         // Inicializa variables no modificables
         var id = "";
-        var url = "/inventario/tools/";
+
+        // Reinicia los valores por default del modal al cerrarse con el botón 'x'
+        $('#closeBtn').on('click', function(){
+            e.preventDefault();
+            $("#typeUpdate").val('tools');
+            $('#descUpdate').attr('value',"");
+            $('#typeUpdate').attr('value',"");
+            $('#brandUpdate').attr('value',"");
+            $('#modelUpdate').attr('value',"");
+            $('#seriesUpdate').attr('value',"");
+            $('#uazUpdate').attr('value',"");
+            $('#guardUpdate').attr('value',"");
+            $('#locationUpdate').attr('value',"");
+            $('#detailsUpdate').attr('value',"");
+            $('#fundingUpdate').attr('value',"");
+            $('#rfidUpdate').attr('value', "");
+        });
+
+        // Reinicia los valores por default del modal al cerrarse con el botón 'Cancelar'
+        $('#cancelBtn').on('click', function(){
+            e.preventDefault();
+            $("#typeUpdate").val('tools');
+            $('#descUpdate').attr('value',"");
+            $('#typeUpdate').attr('value',"");
+            $('#brandUpdate').attr('value',"");
+            $('#modelUpdate').attr('value',"");
+            $('#seriesUpdate').attr('value',"");
+            $('#uazUpdate').attr('value',"");
+            $('#guardUpdate').attr('value',"");
+            $('#locationUpdate').attr('value',"");
+            $('#detailsUpdate').attr('value',"");
+            $('#fundingUpdate').attr('value',"");
+            $('#rfidUpdate').attr('value', "");
+        });
+
+        // Inicializa el tipo de acuerdo al predeterminado
+        $(function() {
+            $("#typeUpdate").val('tools');
+            $("#typeCreate").val('tools');
+        });
 
         // Inicializa el dataTable
         var table = $('#dataTable').DataTable({
@@ -75,7 +115,8 @@
             }
         });
 
-        $('#dataTable tbody').on('click', 'tr', function(){
+        // Evento de click a una fila de la tabla.
+       $('#dataTable tbody').on('click', 'tr', function(){
             // Se obtienen todos los valores de los campos en la fila seleccionada
             var datos = table.row(this).data();
             // Se obtiene el id del item de inventario
@@ -110,7 +151,7 @@
             $('#rfidUpdate').attr('value', "");
         });
 
-        // Evento de cierre de modal de actualización, reinicia la url y los campos
+        // Evento de cierre de modal de creación, reinicia la url y los campos
         $('#createModal').on('hidden.bs.modal', function(e){
             e.preventDefault();
             $('#descCreate').attr('value',"");

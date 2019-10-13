@@ -13,7 +13,16 @@
 					<label data-error="wrong" data-success="right" for="descCreate">Descripción:</label>
 					<input type="text" class="form-control validate" id="descCreate">
 					<label data-error="wrong" data-success="right" for="typeCreate">Tipo:</label>
-    				<input type="text" class="form-control validate" id="typeCreate">
+    				<select id="typeCreate" class="form-control" data-live-search="true">
+  						<option value="cal">Calefacción</option>
+  						<option value="comp">Cómputo</option>
+  						<option value="tools">Herramientas</option>
+						<option value="lab">Laboratorio</option>
+						<option value="ofc">Oficina</option>
+						<option value="pry">Proyección</option>
+						<option value="net">Redes</option>
+						<option value="sec">Seguridad</option>
+					</select>
                     <label data-error="wrong" data-success="right" for="brandCreate">Marca:</label>
 					<input type="text" class="form-control validate" id="brandCreate">
                     <label data-error="wrong" data-success="right" for="modelCreate">Modelo:</label>

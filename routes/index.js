@@ -10,14 +10,12 @@ router.get('/inventario', (req, res) => {
 router.post('/inventario', async (req, res) => {
     var {descr, type, brand, model, serial, uaz, guard, location, details, funding, rfid} = req.body;
     // Se obtiene el código del tipo antes de almacenarlo en la DB
-    var typo = types.get(type.normalize('NFD').replace(/[\u0301]/g,'').toLowerCase());
-    console.log(typo);
     try{ 
         const inventarioCalefaccion = new Inventario(
             {
                 _id: new ObjectId(),
                 description: descr,
-                type: typo,
+                type: type,
                 brand: brand,
                 model: model,
                 serial: serial,
@@ -49,14 +47,12 @@ router.post('/inventario', async (req, res) => {
 router.put('/inventario/edit/:id', async (req, res) => {
     var {descr, type, brand, model, serial, uaz, guard, location, details, funding, rfid} = req.body;
     
-    // Se obtiene el código del tipo antes de almacenarlo en la DB
-    var typo = types.get(type.normalize('NFD').replace(/[\u0301]/g,'').toLowerCase());
     try{
         const inventarioCalefaccion = await Inventario.findByIdAndUpdate(req.params.id, 
             {
                 $set: {
                     description: descr,
-                    type: typo,
+                    type: type,
                     brand: brand,
                     model: model,
                     serial: serial,

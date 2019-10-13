@@ -3,7 +3,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="updateModalLabel">Actualizar datos</h5>
-				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
+				<button id="closeBtn" class="close" type="button" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">×</span>
 				</button>
 			</div>
@@ -13,7 +13,16 @@
 					<label data-error="wrong" data-success="right" for="descUpdate">Descripción:</label>
 					<input type="text" class="form-control validate" id="descUpdate">
 					<label data-error="wrong" data-success="right" for="typeUpdate">Tipo:</label>
-    				<input type="text" class="form-control validate" id="typeUpdate">
+					<select id="typeUpdate" class="form-control" data-live-search="true">
+  						<option value="cal">Calefacción</option>
+  						<option value="comp">Cómputo</option>
+  						<option value="tools">Herramientas</option>
+						<option value="lab">Laboratorio</option>
+						<option value="ofc">Oficina</option>
+						<option value="pry">Proyección</option>
+						<option value="net">Redes</option>
+						<option value="sec">Seguridad</option>
+					</select>
                     <label data-error="wrong" data-success="right" for="brandUpdate">Marca:</label>
 					<input type="text" class="form-control validate" id="brandUpdate">
                     <label data-error="wrong" data-success="right" for="modelUpdate">Modelo:</label>
@@ -35,7 +44,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+				<button id="cancelBtn" class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
 				<button id="submitBtn" type="button" class="btn btn-primary">Actualizar</button>
 			</div>
 		</div>
