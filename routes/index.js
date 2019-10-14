@@ -2,12 +2,13 @@ const express = require('express');
 const router = express.Router();
 const Inventario = require('../models/Inventario');
 const ObjectId = mongoose.Types.ObjectId;
+const { isAuthenticated } = require('../helpers/auth');
 
-router.get('/inventario', (req, res) => {
+router.get('/inventario', isAuthenticated, (req, res) => {
     res.render('index');
 });
 
-router.post('/inventario', async (req, res) => {
+router.post('/inventario', isAuthenticated, async (req, res) => {
     var {descr, type, brand, model, serial, uaz, guard, location, details, funding, rfid} = req.body;
     // Se obtiene el código del tipo antes de almacenarlo en la DB
     try{ 
@@ -44,7 +45,7 @@ router.post('/inventario', async (req, res) => {
 });
 
 // Ruta para actualizar
-router.put('/inventario/edit/:id', async (req, res) => {
+router.put('/inventario/edit/:id', isAuthenticated, async (req, res) => {
     var {descr, type, brand, model, serial, uaz, guard, location, details, funding, rfid} = req.body;
     
     try{
@@ -72,7 +73,7 @@ router.put('/inventario/edit/:id', async (req, res) => {
 });
 
 // Ruta para eliminar
-router.delete('/inventario/delete', async (req, res) => {
+router.delete('/inventario/delete', isAuthenticated, async (req, res) => {
     var { descr, rfid} = req.body;
     const inventarioCalefaccion = Inventario.findOneAndDelete({description:descr, rfid: rfid}).exec(function (err, inventarioCalefaccion) {
         if (err) {

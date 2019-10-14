@@ -2,11 +2,14 @@ const express = require('express');
 const path = require('path');
 const exhbs = require('express-handlebars');
 const Handlebars = require('handlebars');
-
+const session = require('express-session');
+const passport = require('passport');
+const flash = require('connect-flash');
 
 // Var inits
 const app = express();
 require('./dbconnect');
+require('./config/passport');
 
 // Settings
 app.set('port',process.env.PORT || 3001);
@@ -58,11 +61,23 @@ app.set('view engine','.hbs');
 
 // Middlewares
 app.use(express.urlencoded({extended:true}));
-
+app.use(session({
+    secret:'mysecretapp',
+    saveUninitialized: true,
+    resave: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 
 // Global variables
-// mapa de los tipos de inventario con acento
+app.use((req, res, next) => {
+    res.locals.error = req.flash('error');
+    res.locals.user = req.user || null;
+    next();
+});
+// mapa de los tipos de inventario con acento para representarse en la tabla.
 typesSpa = new Map();
 typesSpa.set("cal","Calefacci&oacuten");
 typesSpa.set("comp","C&oacutemputo");
@@ -84,6 +99,7 @@ app.use(require('./routes/proyeccion'));
 app.use(require('./routes/redes'));
 app.use(require('./routes/seguridad'));
 app.use(require('./routes/tarjetas'));
+app.use(require('./routes/users'));
 
 // Static Files
 app.use(express.static(__dirname + '/public'));

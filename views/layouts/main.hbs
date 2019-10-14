@@ -21,6 +21,7 @@
         <!-- Page wrapper -->
         <div id="wrapper">
             <!-- Sidebar -->
+            {{#if user}}
             <ul id="accordionSidebar" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion">
                 <!-- Sidebar - brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/inventario">
@@ -165,15 +166,24 @@
                                     <span class="mr-2 d-lg-inline text-gray-600 small">Usuario</span>
                                     <img class="img-profile rounded-circle" src="https://bacngoctuan.com/template/default/images/user-icon.png">
                                 </a>
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="/users/logout" data-toggle="modal" data-target="#logoutModal">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Cerrar Sesión
+                                    </a>
+                                </div>
                             </li>
                         </ul>
                     </nav>
                     <!-- End of Topbar -->
+
+                    {{/if}}
                     <!-- Begin page content -->
                     <div class="container-fluid">
                         <!-- Content hbs -->
                         {{{body}}}
                     </div>
+                    {{> logoutModal}}
                 </div>
             </div>
         </div>
