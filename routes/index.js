@@ -4,7 +4,7 @@ const Inventario = require('../models/Inventario');
 const ObjectId = mongoose.Types.ObjectId;
 const { isAuthenticated } = require('../helpers/auth');
 
-router.get('/inventario', isAuthenticated, (req, res) => {
+router.get('/', isAuthenticated, (req, res) => {
     res.render('index');
 });
 
