@@ -10,7 +10,7 @@ router.get('/users/signin', (req, res) =>{
 });
 
 router.post('/users/signin', passport.authenticate('local',{
-    successRedirect: '/inventario',
+    successRedirect: '/',
     failureRedirect: '/users/signin',
     failureFlash: true
 }));
@@ -29,7 +29,7 @@ router.post('/admin/signup', async (req, res) => {
 
 router.get('/users/logout', isAuthenticated, (req, res) => {
     req.logOut();
-    res.redirect('/inventario/users/signin');
+    res.redirect('/users/signin');
 });
 
 module.exports = router;
