@@ -15,11 +15,11 @@ router.post('/users/signin', passport.authenticate('local',{
     failureFlash: true
 }));
 
-router.get('/users/signup', isAuthenticated, (req, res) => {
+router.get('/admin/signup', (req, res) => {
     res.render('users/signup');
 });
 
-router.post('/users/signup', async (req, res) => {
+router.post('/admin/signup', async (req, res) => {
     const { name, email, password } = req.body;
     const newUser = new User({name, email, password});
     newUser.password = await newUser.encryptPassword(password);
